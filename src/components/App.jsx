@@ -23,7 +23,6 @@ export default class App extends Component {
     }
   }
 
-
   async fetchPictures() {
     try {
       this.setState({ loading: true });
@@ -39,17 +38,14 @@ export default class App extends Component {
     }
   }
 
-
   searchPictures = ({ search }) => {
     this.setState({ search, pictures: [], page: 1 });
   };
-
 
   loadMore = () => {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
-  
   render() {
     const { pictures, loading, error } = this.state;
     const { searchPictures, loadMore } = this;
