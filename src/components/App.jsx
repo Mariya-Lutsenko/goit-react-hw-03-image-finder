@@ -2,6 +2,7 @@ import { Component } from 'react';
 import styles from './App.module.css';
 import axios from 'axios';
 import Searchbar from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
 // import { ToastContainer, toast } from 'react-toastify';
 
 export default class App extends Component {
@@ -26,18 +27,15 @@ export default class App extends Component {
   }
   render() {
     const { pictures, loading, error } = this.state;
-    const elements = pictures.map(({ id, webformatURL, largeImageURL }) => (
-      <li key={id}>
-        <img src={webformatURL} alt="" />
-      </li>
-    ));
+   
     return (
       <div className={styles.App}>
         <Searchbar/>
+        <ImageGallery pictures={pictures}/>
         
         {loading && <p>...Loading</p>}
         {error && <p>Something goes wrong</p>}
-        <ul>{elements}</ul>;
+      
       </div>
     );
   }
