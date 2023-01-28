@@ -33,7 +33,7 @@ class Searchbar extends Component {
   }
 
   render() {
-    const { search } = this.state;
+    // const { search } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
       <header className={styles.Searchbar}>
