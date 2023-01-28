@@ -7,35 +7,42 @@ import ImageGallery from './ImageGallery/ImageGallery';
 
 export default class App extends Component {
   state = {
+    search: '',
     pictures: [],
     loading: false,
     error: null,
   };
-  componentDidMount() {
-    this.setState({ loading: true });
-    axios
-      .get(
-        'https://pixabay.com/api/?key=31909701-b05a4a73718479a7bf524b9e0&q=cat&page=1&&image_type=photo&orientation=horizontal&per_page=12'
-      )
-      .then(({ data }) => {
-        this.setState({ pictures: data.hits });
-      })
-      .catch(error => {
-        this.setState({ error: error.message });
-      })
-      .finally(() => this.setState({ loading: false }));
+
+  componentDidUpdate(prevProps, prevState) {
+    const { search } = this.state;
+    if (prevState.search !== search) {
+      this.setState({ loading: true });
+      axios
+        .get(
+          `https://pixabay.com/api/?key=31909701-b05a4a73718479a7bf524b9e0&q=${search}&page=1&&image_type=photo&orientation=horizontal&per_page=12`
+        )
+        .then(({ data }) => this.setState({ pictures: data.hits }))
+        .catch(error => this.setState({ error: error.message }))
+        .finally(() => this.setState({ loading: false }))
+    }
   }
+
+  searchPictures = ({ search }) => {
+    this.setState({ search });
+  };
+
+
   render() {
     const { pictures, loading, error } = this.state;
-   
+    const { searchPictures } = this;
+
     return (
       <div className={styles.App}>
-        <Searchbar/>
-        <ImageGallery pictures={pictures}/>
-        
+        <Searchbar onSubmit={searchPictures} />
+        <ImageGallery pictures={pictures} />
+
         {loading && <p>...Loading</p>}
         {error && <p>Something goes wrong</p>}
-      
       </div>
     );
   }
