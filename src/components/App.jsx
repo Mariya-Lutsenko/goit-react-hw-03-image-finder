@@ -3,6 +3,7 @@ import styles from './App.module.css';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
+import Button from './Button/Button';
 import {searchPictures} from '../services/api'
 // import { ToastContainer, toast } from 'react-toastify';
 
@@ -12,14 +13,15 @@ export default class App extends Component {
     pictures: [],
     loading: false,
     error: null,
+    page: 1,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { search } = this.state;
-    if (prevState.search !== search) {
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page!== page) {
       this.setState({ loading: true });
-      searchPictures(search)
-        .then( data  => this.setState({ pictures: data.hits }))
+      searchPictures(search, page)
+        .then( data  => this.setState(({pictures})=> ({pictures: [...pictures, ...data.hits]})))
         .catch(error => this.setState({ error: error.message }))
         .finally(() => this.setState({ loading: false }))
     }
@@ -29,10 +31,14 @@ export default class App extends Component {
     this.setState({ search });
   };
 
+  loadMore = () =>{
+    this.setState(({page}) => ({page: page + 1}))
+  }
+
 
   render() {
     const { pictures, loading, error } = this.state;
-    const { searchPictures } = this;
+    const { searchPictures, loadMore } = this;
 
     return (
       <div className={styles.App}>
@@ -41,6 +47,7 @@ export default class App extends Component {
 
         {loading && <p>...Loading</p>}
         {error && <p>Something goes wrong</p>}
+        {pictures.length>=12 && <Button onClick={loadMore}/> }
       </div>
     );
   }
