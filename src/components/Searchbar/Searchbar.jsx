@@ -11,11 +11,15 @@ class Searchbar extends Component {
     search: '',
   };
 
-  handleChange = ({ target }) => {
-    const { value } = target;
-    this.setState({ search: value });
-  };
+//   handleChange = ({ target }) => {
+//     const { value } = target;
+//     this.setState({ search: value });
+//   };
 
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
 
 
 
@@ -33,7 +37,7 @@ class Searchbar extends Component {
   }
 
   render() {
-    // const { search } = this.state;
+    const { search } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
       <header className={styles.Searchbar}>
@@ -45,7 +49,8 @@ class Searchbar extends Component {
           <input
             className={styles.SearchForm__input}
             onChange={handleChange}
-            // value={search}
+            name="search"
+            value={search}
             type="text"
             autocomplete="off"
             autofocus
