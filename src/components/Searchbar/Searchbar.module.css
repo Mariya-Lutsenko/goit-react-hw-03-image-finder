@@ -33,12 +33,12 @@
   overflow: hidden;
 }
 
-.SearchForm-button {
+.SearchForm__button {
   display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('https://cdn-icons-png.flaticon.com/512/650/650154.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -52,7 +52,7 @@
   opacity: 1;
 }
 
-.SearchForm-button-label {
+.SearchForm__button__label {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -64,7 +64,7 @@
   border: 0;
 }
 
-.SearchForm-input {
+.SearchForm__input {
   display: inline-block;
   width: 100%;
   font: inherit;
