@@ -1,5 +1,5 @@
 import styles from './ImageGallery.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const ImageGallery = ({pictures}) => {
   return <ul className={styles.ImageGallery}>
