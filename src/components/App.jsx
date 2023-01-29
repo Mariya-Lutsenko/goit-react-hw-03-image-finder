@@ -5,6 +5,7 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import { fetchPicturesQuery } from '../services/api';
+import Modal from './Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +16,9 @@ export default class App extends Component {
     loading: false,
     error: null,
     page: 1,
-    totalHits:null,
+    totalHits: null,
+    showModal: false,
+    largeImage: '',
   };
 
   componentDidUpdate(_, prevState) {
@@ -35,7 +38,7 @@ export default class App extends Component {
         : this.setState(({ pictures }) => ({
             pictures: [...pictures, ...data.hits],
           }));
-      this.setState({totalHits: data.totalHits});
+      this.setState({ totalHits: data.totalHits });
     } catch (error) {
       this.setState({ error: error.message });
     } finally {
@@ -55,17 +58,31 @@ export default class App extends Component {
     });
   };
 
+  openModal = index => {
+    this.setState(({ pictures }) => ({
+      showModal: true,
+      largeImage: pictures[index].largeImageURL,
+    }));
+  };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
 
   render() {
-    const { pictures, loading, error, totalHits } = this.state;
-    const { searchPictures, loadMore } = this;
+    const { largeImage, pictures, loading, error, totalHits, showModal } =
+      this.state;
+    const { searchPictures, loadMore, openModal, toggleModal } = this;
 
     return (
       <div className={styles.App}>
         <Searchbar onSubmit={searchPictures} />
-        {pictures.length>0 && <ImageGallery pictures={pictures} />}
-        
+        {pictures.length !== 0 && (
+          <ImageGallery pictures={pictures} openModal={openModal} />
+        )}
+        {showModal && (
+          <Modal toggleModal={toggleModal} largeImage={largeImage} />
+        )}
 
         {loading && <p>...Loading</p>}
         {error && <p>Something goes wrong</p>}
