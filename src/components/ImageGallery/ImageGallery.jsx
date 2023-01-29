@@ -1,12 +1,12 @@
 import styles from './ImageGallery.module.css';
-// import PropTypes from 'prop-types';
+import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
+import PropTypes from 'prop-types';
 
-const ImageGallery = ({pictures}) => {
+const ImageGallery = ({pictures, openModal}) => {
   return <ul className={styles.ImageGallery}>
     {pictures.map(({ id, webformatURL}) => (
-      <li key={id}>
-        <img src={webformatURL} alt="" />
-      </li>
+<ImageGalleryItem key={id}  webformatURL={webformatURL} id={id} openModal={openModal}
+/>
     ))}
   </ul>;
 };
@@ -14,5 +14,16 @@ const ImageGallery = ({pictures}) => {
 ImageGallery.defaultProps = {
     pictures: []
 }
+
+
+ImageGallery.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  pictures: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+    })
+  ),
+};
 
 export default ImageGallery;
