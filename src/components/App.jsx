@@ -8,6 +8,7 @@ import { fetchPicturesQuery } from '../services/api';
 import Modal from './Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from './Loader/Loader';
 
 export default class App extends Component {
   state = {
@@ -84,7 +85,7 @@ export default class App extends Component {
           <Modal toggleModal={toggleModal} largeImage={largeImage} />
         )}
 
-        {loading && <p>...Loading</p>}
+        {loading && <Loader/>}
         {error && <p>Something goes wrong</p>}
         {totalHits > pictures.length && <Button onClick={loadMore} />}
         <ToastContainer autoClose={1500} />
