@@ -15,8 +15,8 @@ const ImageGalleryItem = ({ webformatURL, index, openModal }) => {
 };
 
 ImageGalleryItem.propTypes = {
-  index: PropTypes.number.isRequired,
   webformatURL: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   openModal: PropTypes.func.isRequired,
 };
 
