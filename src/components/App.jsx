@@ -4,11 +4,13 @@ import styles from './App.module.css';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
-import { fetchPicturesQuery } from '../services/api';
 import Modal from './Modal/Modal';
+import Loader from './Loader/Loader';
+
+import { fetchPicturesQuery } from '../services/api';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from './Loader/Loader';
 
 export default class App extends Component {
   state = {
@@ -85,7 +87,7 @@ export default class App extends Component {
           <Modal toggleModal={toggleModal} largeImage={largeImage} />
         )}
 
-        {loading && <Loader/>}
+        {loading && <Loader />}
         {error && <p>Something goes wrong</p>}
         {totalHits > pictures.length && <Button onClick={loadMore} />}
         <ToastContainer autoClose={1500} />
