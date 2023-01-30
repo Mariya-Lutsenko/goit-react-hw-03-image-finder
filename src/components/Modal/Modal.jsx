@@ -9,7 +9,7 @@ class Modal extends Component {
     toggleModal: PropTypes.func.isRequired,
     largeImage: PropTypes.shape({
       src: PropTypes.string.isRequired,
-    })
+    }),
   };
 
   componentDidMount() {
@@ -33,7 +33,9 @@ class Modal extends Component {
 
   render() {
     const { handleBackdropClick } = this;
-    const { largeImage:{src}} = this.props;
+    const {
+      largeImage: { src },
+    } = this.props;
     return createPortal(
       <div className={styles.Overlay} onClick={handleBackdropClick}>
         <div className={styles.Modal}>

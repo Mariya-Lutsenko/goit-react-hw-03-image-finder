@@ -61,12 +61,11 @@ export default class App extends Component {
     });
   };
 
-  openModal = (data) => {
+  openModal = data => {
     this.setState({
       showModal: true,
-      largeImage:data,
-
-    })
+      largeImage: data,
+    });
   };
 
   toggleModal = () => {
@@ -90,7 +89,9 @@ export default class App extends Component {
 
         {loading && <Loader />}
         {error && <p>Something goes wrong</p>}
-        {totalHits > pictures.length && <Button onClick={loadMore} />}
+        {totalHits > pictures.length && !loading && (
+          <Button onClick={loadMore} />
+        )}
         <ToastContainer autoClose={1500} />
       </div>
     );

@@ -8,7 +8,7 @@ const ImageGalleryItem = ({ webformatURL, largeImageURL, openModal }) => {
         className={styles.ImageGalleryItem__image}
         src={webformatURL}
         alt=""
-        onClick={() => openModal({src: largeImageURL})}
+        onClick={() => openModal({ src: largeImageURL })}
       />
     </li>
   );
