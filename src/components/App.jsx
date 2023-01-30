@@ -21,7 +21,7 @@ export default class App extends Component {
     page: 1,
     totalHits: null,
     showModal: false,
-    largeImage: '',
+    largeImage: null,
   };
 
   componentDidUpdate(_, prevState) {
@@ -61,11 +61,12 @@ export default class App extends Component {
     });
   };
 
-  openModal = index => {
-    this.setState(({ pictures }) => ({
+  openModal = (data) => {
+    this.setState({
       showModal: true,
-      largeImage: pictures[index].largeImageURL,
-    }));
+      largeImage:data,
+
+    })
   };
 
   toggleModal = () => {

@@ -7,7 +7,9 @@ const modalRoot = document.querySelector('#modal-root');
 class Modal extends Component {
   static propTypes = {
     toggleModal: PropTypes.func.isRequired,
-    largeImage: PropTypes.string.isRequired,
+    largeImage: PropTypes.shape({
+      src: PropTypes.string.isRequired,
+    })
   };
 
   componentDidMount() {
@@ -31,11 +33,11 @@ class Modal extends Component {
 
   render() {
     const { handleBackdropClick } = this;
-    const { largeImage } = this.props;
+    const { largeImage:{src}} = this.props;
     return createPortal(
       <div className={styles.Overlay} onClick={handleBackdropClick}>
         <div className={styles.Modal}>
-          <img src={largeImage} alt="" />
+          <img src={src} alt="" />
         </div>
       </div>,
       modalRoot
